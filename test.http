@@ -1,2 +1,18 @@
-GET   http://localhost:4000/projects/
+POST   http://localhost:4000/localhost:4000/employees/add/
 Content-Type: application/json
+
+{
+     "firstname":"saravana",
+        "lastname":"kumar",
+        "dob":13/11/97,
+        "aadhar":123456789123,
+        "address1":"address1",
+        "address2":"address2",
+        "city":"kalkurihci",
+        "state":"tamilnadu",
+        "country":"india",
+        "zipcode":123456,
+        "email":"kmsaravanan333@gmail.com", 
+        "phone":9791770762,
+        "gst":12345 
+}
