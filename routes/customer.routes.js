@@ -10,19 +10,7 @@ router.get('/',(req,res)=>{
 })
 
 router.post('/add',(req,res)=>{
-    const customer = new customerTemplateCopy({
-        firstname:req.body.firstname,
-        lastname:req.body.lastname,
-        address1:req.body.address1,
-        address2:req.body.address2,
-        city:req.body.city,
-        state:req.body.state,
-        country:req.body.country,
-        zipcode:req.body.zipcode,
-        email:req.body.email, 
-        phone:req.body.phone,
-        gst:req.body.gst        
-    })
+    const customer = new customerTemplateCopy(req.body);
     customer.save()
     .then(data => res.json(data))
     .catch(error => res.status(400).json('Error:'+error))
