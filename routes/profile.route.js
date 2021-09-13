@@ -27,31 +27,33 @@ multer({
     })
 })
 
- const upload = multer({storage}).single('image')
+ const upload = multer({storage}).single('myImag')
 
 router.post('/upload',upload,(req,res)=>{
 
     //let myFile = req.params.file.originalname
     //const fileType = myFile[myFile.length - 1]
-    
+    const s3FileURL = process.env.AWS_Uploaded_File_URL_LINK;
 
-    console.log(req.file)
-    res.send({
-        message:"file uploaded"
-    })
+    //console.log(req.file)
+   
+     const params = {
+        Bucket:process.env.AWS_BUCKET_NAME,
+         Key:req.file.originalname,
+         Body:req.file.buffer
+     }
 
-    // const params = {
-    //     Bucket:process.env.AWS_BUCKET_NAME,
-    //     Key:req.file.originalname,
-    //     Body:req.file.buffer
-    // }
-
-    // s3.upload(params,(error,data)=>{
-    //     if(error){
-    //         res.status(500).send(error)
-    //     }
-    //     res.status(200).send(data)
-    // })
+     s3.upload(params,(error,data)=>{
+         if(error){
+        // res.status(500).send(error)
+         }
+         else
+         {
+           var fileLink=s3FileURL + req.file.originalname;
+            res.status(200).send(fileLink);  
+         }
+        // res.status(200).send(data)
+     })
 })
 
 

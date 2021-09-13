@@ -13,6 +13,7 @@ const employeeTemplate = new mongoose.Schema({
     email:{type:String,required:true}, 
     phone:{type:Number,required:true},
     gst:{type:String,required:true}, 
+    imageurl:{type:String,required:true},
     date:{type:Date,default:Date.now}
 })
 
