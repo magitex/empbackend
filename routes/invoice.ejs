@@ -1,0 +1,206 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <title>Document</title>
+    <style>
+        .container-fluid{
+    padding: 5rem 20rem 10rem 20rem;
+}
+.header{
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+hr:not([size]){
+    height: 6px;
+}
+
+.invoice{
+    text-align: center;
+    border-style: solid;
+    border-width: thin;
+    margin-top: 30px;
+    margin-bottom: 0px;
+    padding: 8px;
+}
+
+.table1{
+    border-style: solid;
+    border-width: thin;
+}
+.table2{
+    border-style: solid none;
+    border-width: thin;
+}
+
+
+
+table {
+    border:1px solid black;
+    width: 100%;
+  }
+
+  th,td{
+    border:1px solid black;
+  }
+
+  .gst{
+      border: none;
+  }
+.bank{
+    display: flex;
+}
+
+  .invoicecontent{
+      display: flex;
+      justify-content: space-between;
+  }
+
+
+ 
+  .payment{
+      width: 50%;
+      padding: 20px;
+      border-bottom: solid;
+      border-width: thin;
+      border-top: none;
+      border-left: none;
+  }
+
+  .thank{
+      color: coral;
+      text-align: center;
+      padding: 10px;
+  }
+  .tableflex{
+    border: none;
+  }
+  .invoice1{
+      padding: 20px;
+      border-right: solid;
+      border-bottom: solid;
+      border-width: thin;
+  }
+  .invoice2{
+      padding: 20px;
+      border-right: solid;
+      border-width: thin;
+  }
+  .invoice3{
+      width: 50%;
+      padding-left: 20px;
+  }
+    </style>
+</head>
+<body>
+    <div class="container-fluid ">
+        <div class='table1'>
+            <div>
+                <table  class="tableflex"> 
+                    <tr>
+                      <th  class="tableflex">Logo</th>                      
+                      <th class="tableflex text-end p-4">
+                        <h5>B 104, Pasha Court,</h5>
+                        <h5>6-3-680, Somajiguda,</h5>
+                        <h5>Hyderabad 500082.</h5>
+                        <h5 class="mt-2">+91 9949509933</h5>
+                        <h5 class="mt-2">www.jackfruitsolutions.com</h5> 
+                      </th>
+                    </tr>
+                </table>
+                <!-- Stack the columns on mobile by making one full-width and the other half-width -->
+                  
+        </div>
+        <hr/>
+        <div>
+        <h3 class='invoice table2'>Invoice</h3>
+        <div class='invoicecontent'>           
+            <table class="tableflex">                
+                <tr class="tableflex">
+                <td class="tableflex invoice1">
+                    <h5>PO No: JFP -011018</h5>
+                    <h5>PO Date: 01st October, 2018</h5>
+                </td>
+                  <td  class="tableflex invoice3" >
+                    <h5>Invoice No: JFI-270721-04</h5>
+                    <h5>Invoice Date: 27th July, 2021</h5>
+                    <h5>Bill To: Pratap Health and Foods (India) Pvt. Ltd.</h5>
+                    <h5>Address: 8-2-573, Road No 7, Banjara Hills, Hyderabad,Telangana 500034.</h5>
+                    <h5>GSTIN: 36AACCP0735G1ZO</h5>
+                  </td>             
+                </tr>
+                <tr class="tableflex">
+                  <td  class="tableflex invoice2">
+                    <h5>CIN # : U72900TG2018PTC129341</h5>
+                    <h5>PAN # : AAECJ4298A</h5>
+                    <h5>GST # : 36AAECJ4298A1ZM</h5>
+                  </td>               
+                </tr>
+              </table>    
+                        
+        </div>
+        <table>
+            <tbody>
+            <tr>
+                <th>DESCRIPTION</th>
+                <th>HOURS</th>
+                <th>RATE/HR</th>
+                <th>AMOUNT IN RUPEES</th>
+            </tr>
+            <tr>
+                <td>PHF Static Website</td>
+                <td></td>
+                <td></td>
+                <td>5,000</td>
+            </tr>  
+            <tr>
+                <td class='gst'>GST @18%</td>
+                <td class='gst'></td>
+                <td class='gst'></td>
+                <td>900</td>
+            </tr>   
+            <tr>
+                <td class='gst'>TOTAL (Five Thousand nine hundred rupees only)</td>
+                <td class='gst'></td>
+                <td class='gst'></td>
+                <td>5,900</td>
+            </tr> 
+            </tbody>             
+        </table>
+        </div>
+        <div class='tableflex'>
+            <table class='tableflex'>
+                <tr class='tableflex'>
+                  <td class='tableflex invoice1'>
+                    <h4><b>Bank Detail</b></h4>
+                    <h5>Name - Jackfruittree Solutions Private Limited</h5>
+                    <h5>Bank Name - ICICI Bank</h5>
+                    <h5>Account Number - 410805000147</h5>
+                    <h5>IFSC Code - ICIC0004108</h5>
+                    <h5>Type – Current A/C</h5>
+                  </td>
+                  <td class=' payment'>
+                    <h4><b>Payment Term</b></h4>
+                    <h5>100% on receipt of invoice.</h5>
+                  </td>                
+                </tr>
+              </table>
+          
+          
+        </div>
+        <div class='thank'>
+            <h5>We thank you for your business!</h5>
+        </div>
+    </div>
+        <div class='pt-2'>
+            <h5>Sincerely,</h5>
+            <h5>Soujanya Venkatesh</h5>
+            <h5>(Director)</h5>
+        </div>    
+    </div>
+</body>
+</html>

@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 
 const invoiceTemplateCopy = new mongoose.Schema({
     companyname:{type:String,required:true},
+    invoiceurl:{type:String,required:false},
     description:{type:String,required:true},
     totalhours:{type:Number,required:true},
     hourlyrate:{type:Number,required:true},
