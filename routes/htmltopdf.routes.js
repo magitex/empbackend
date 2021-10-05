@@ -5,23 +5,27 @@ let ejs = require("ejs");
 let pdf = require("html-pdf");
 let path = require("path");
 const aws = require('aws-sdk')
+const { ToWords } = require('to-words');
+const toWords = new ToWords();
 const invoiceTemplateCopy = require('../models/InvoiceModels')
+const customerTemplateCopy = require('../models/CustomerModels')
+
 
 const router = express.Router()
 const updatepdf =({params},res) => {
-  console.log(params);
-console.log(params.invoiceurl);
-console.log(params._id);
+ //console.log(params);
+//console.log(params.invoiceurl);
+//console.log(params._id);
 
-  invoiceTemplateCopy.findByIdAndUpdate({ _id: params._id },{
-      $set:{ invoiceurl: params.invoiceurl }
-  },{new: true},
+  invoiceTemplateCopy.findOneAndUpdate({ _id: params._id },{
+      $set:{ invoiceurl: params.invoiceurl },
+  },{new: true,useFindAndModify: false},
   function(err, result) {
     if (err) {
       console.log(err);
 
     } else {
-      console.log(result);
+      //console.log('updateddata',result);
     }
   }
 //   (err)=> {if(err) return res.status(400).json({success:false,err})
@@ -30,12 +34,56 @@ console.log(params._id);
 ); 
   
 }
-const generateReportWeb = (req, res, next) => {
-    console.log(req.body);
+
+
+ const generateReportWeb = (req, res, next) => {
+  
+  //var results =await customerTemplateCopy.find( {_id: req.body.companyname});
+  //console.log('results',results);
+  
+  var totalcgst=0;
+  var gstpercent=0;
+
+  var totalsgst=0;
+  var sgstpercent=0;
+  var grtotal=0;
+
+  var total=req.body.invoiceDetails.map(item => eval(item.totalamount)).reduce((prev, next) => prev + next);
+  if(req.body.compdtls.country=='India')
+  {
+if(req.body.compdtls.state=='Telangana')
+{
+  gstpercent=9;
+  sgstpercent=9;
+
+  totalcgst=total*(gstpercent/100);
+  totalsgst=total*(sgstpercent/100);
+}
+else
+{
+  gstpercent=18;
+  totalcgst=total*(gstpercent/100);
+  
+}
+  }
+  grtotal=total+totalcgst+totalsgst;
+  let words = toWords.convert(grtotal);
+  console.log('total',total);
+
     var invoiceId=req.body.id;
+    console.log('INVID',invoiceId);
+    console.log(req.body);
+
     var invoiceURL="";
     ejs.renderFile(path.join(__dirname, "/invoice.ejs"), {
-     invDetails: req.body
+     invDetails: req.body,
+     totalcgst: totalcgst,
+     totalsgst: totalsgst,
+     gstpercent: gstpercent,
+     sgstpercent: sgstpercent,
+     grtotal:grtotal.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,'),
+     words:words,
+
     }, (err, data) => {
       if (err) {
         res.send("Error in report template "+err);
@@ -55,21 +103,21 @@ const generateReportWeb = (req, res, next) => {
           if (err) {
             res.send(err);
           } else {
-            console.log('This is a buffer:', data);
+            //console.log('This is a buffer:', data);
   
             aws.config.setPromisesDependency();
             aws.config.update({
-              "accessKeyId": 'AKIAXVRNIZQF6RK36ZDB',
-              "secretAccessKey": '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',
+              "accessKeyId": 'AKIAXVRNIZQF37FR3FHZ',
+              "secretAccessKey": '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',
             });
   
             const s3 = new aws.S3();
             var timeInMss = Date.now();
-            console.log("here "+invoiceId)
+            //console.log("here "+invoiceId)
   
             var params = {
               ACL: 'public-read',
-              Bucket: "employeepicture",
+              Bucket: "customerinvoice",
               Key: `invoice_`+invoiceId,
               Body: data,
               ContentEncoding: "buffer",
@@ -93,7 +141,7 @@ const generateReportWeb = (req, res, next) => {
               }
   
             });
-            var  x= "https://employeepicture.s3.ap-southeast-1.amazonaws.com/invoice_"+invoiceId;
+            var  x= "https://customerinvoice.s3.ap-southeast-1.amazonaws.com/invoice_"+invoiceId;
             res.status(200).json({invoiceURL:x})
           }
         }); //pdf create

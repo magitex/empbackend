@@ -102,7 +102,8 @@ table {
             <div>
                 <table  class="tableflex"> 
                     <tr>
-                      <th  class="tableflex">Logo</th>                      
+                      <th  class="tableflex"><img src="https://customerinvoice.s3.ap-southeast-1.amazonaws.com/logo.jpg" width="200" height="200" alt="ICON">
+                      </th>                      
                       <th class="tableflex text-end p-4">
                         <h5>B 104, Pasha Court,</h5>
                         <h5>6-3-680, Somajiguda,</h5>
@@ -122,14 +123,14 @@ table {
             <table class="tableflex">                
                 <tr class="tableflex">
                 <td class="tableflex invoice1">
-                    <h5>PO No: JFP -011018</h5>
-                    <h5>PO Date: 01st October, 2018</h5>
+                    <h5>PO No: <%= invDetails.ponumber %></h5>
+                    <h5>PO Date: <%= invDetails.podate %></h5>
                 </td>
                   <td  class="tableflex invoice3" >
-                    <h5>Invoice No: JFI-270721-04</h5>
-                    <h5>Invoice Date: 27th July, 2021</h5>
-                    <h5>Bill To: Pratap Health and Foods (India) Pvt. Ltd.</h5>
-                    <h5>Address: 8-2-573, Road No 7, Banjara Hills, Hyderabad,Telangana 500034.</h5>
+                    <h5>Invoice No: <%= invDetails.invoicenumber %></h5>
+                    <h5>Invoice Date: <%= invDetails.invoicedate %></h5>
+                    <h5>Bill To: <%= invDetails.compdtls.firstname %> <%= invDetails.compdtls.lastname %></h5>
+                    <h5>Address: <%= invDetails.compdtls.address1 %>, <%= invDetails.compdtls.city %>,<%= invDetails.compdtls.state %> <%= invDetails.compdtls.zipcode %>.</h5>
                     <h5>GSTIN: 36AACCP0735G1ZO</h5>
                   </td>             
                 </tr>
@@ -145,29 +146,40 @@ table {
         </div>
         <table>
             <tbody>
+                
             <tr>
                 <th>DESCRIPTION</th>
                 <th>HOURS</th>
                 <th>RATE/HR</th>
                 <th>AMOUNT IN RUPEES</th>
             </tr>
-            <tr>
-                <td>PHF Static Website</td>
-                <td></td>
-                <td></td>
-                <td>5,000</td>
+            <% invDetails.invoiceDetails.forEach(inv => {%>
+                <tr>
+                <td><%= inv.description %></td>
+                <td><%= inv.totalhours %></td>
+                <td><%= inv.hourlyrate %></td>
+                <td><%= inv.totalamount.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') %></td>
             </tr>  
+            <%	});%>
             <tr>
-                <td class='gst'>GST @18%</td>
+                <td class='gst'>GST @<%= gstpercent %>%</td>
                 <td class='gst'></td>
                 <td class='gst'></td>
-                <td>900</td>
-            </tr>   
+                <td><%= totalcgst %></td>
+            </tr>  
+            <% if (totalsgst>0 ) { %> 
             <tr>
-                <td class='gst'>TOTAL (Five Thousand nine hundred rupees only)</td>
+                <td class='gst'>SGST @<%= gstpercent %>%</td>
                 <td class='gst'></td>
                 <td class='gst'></td>
-                <td>5,900</td>
+                <td><%= totalsgst %></td>
+            </tr>  
+            <% } %>
+            <tr>
+                <td class='gst'>TOTAL (<%= words %> only)</td>
+                <td class='gst'></td>
+                <td class='gst'></td>
+                <td><%= grtotal %></td>
             </tr> 
             </tbody>             
         </table>
