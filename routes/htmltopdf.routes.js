@@ -103,7 +103,7 @@ else
           if (err) {
             res.send(err);
           } else {
-            //console.log('This is a buffer:', data);
+            console.log('This is a buffer:', data);
   
             aws.config.setPromisesDependency();
             aws.config.update({
@@ -113,7 +113,7 @@ else
   
             const s3 = new aws.S3();
             var timeInMss = Date.now();
-            //console.log("here "+invoiceId)
+            console.log("here "+invoiceId)
   
             var params = {
               ACL: 'public-read',
@@ -123,7 +123,7 @@ else
               ContentEncoding: "buffer",
               ContentType: "application/pdf"
             };
-  
+            console.log("here running")
             s3.upload(params, function(err, data) {
   
               if (err) {

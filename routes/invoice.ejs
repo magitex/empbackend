@@ -31,6 +31,7 @@ hr:not([size]){
 .table1{
     border-style: solid;
     border-width: thin;
+    margin-left: 5px;
 }
 .table2{
     border-style: solid none;
@@ -46,7 +47,7 @@ table {
 
   th,td{
     border:1px solid black;
-  }
+     }
 
   .gst{
       border: none;
@@ -80,13 +81,13 @@ table {
     border: none;
   }
   .invoice1{
-      padding: 20px;
+      padding: 20px 20px 20px 15px;
       border-right: solid;
       border-bottom: solid;
       border-width: thin;
   }
   .invoice2{
-      padding: 20px;
+      padding: 20px 20px 20px 15px;
       border-right: solid;
       border-width: thin;
   }
@@ -94,6 +95,10 @@ table {
       width: 50%;
       padding-left: 20px;
   }
+ 
+  table.description td, th {
+    padding: 10px 10px 10px 16px;
+ }
     </style>
 </head>
 <body>
@@ -116,7 +121,7 @@ table {
                 <!-- Stack the columns on mobile by making one full-width and the other half-width -->
                   
         </div>
-        <hr/>
+      
         <div>
         <h3 class='invoice table2'>Invoice</h3>
         <div class='invoicecontent'>           
@@ -144,7 +149,8 @@ table {
               </table>    
                         
         </div>
-        <table>
+        
+        <table class="description">
             <tbody>
                 
             <tr>
@@ -183,12 +189,13 @@ table {
             </tr> 
             </tbody>             
         </table>
+    
         </div>
         <div class='tableflex'>
             <table class='tableflex'>
                 <tr class='tableflex'>
                   <td class='tableflex invoice1'>
-                    <h4><b>Bank Detail</b></h4>
+                    <h4><b>Bank Details</b></h4>
                     <h5>Name - Jackfruittree Solutions Private Limited</h5>
                     <h5>Bank Name - ICICI Bank</h5>
                     <h5>Account Number - 410805000147</h5>
@@ -196,7 +203,7 @@ table {
                     <h5>Type – Current A/C</h5>
                   </td>
                   <td class=' payment'>
-                    <h4><b>Payment Term</b></h4>
+                    <h4><b>Payment Terms</b></h4>
                     <h5>100% on receipt of invoice.</h5>
                   </td>                
                 </tr>
