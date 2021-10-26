@@ -54,13 +54,13 @@ router.get('/:id',(req,res)=>{
         .then(data => res.json(data))
         .catch(error => res.status(400).json('Error:'+error))
     }
-    else if(req.params.id=='quarterly')
+    else if(req.params.id=='quarterly' || req.params.id=='1')
     {
         var currentdate="";
         currentdate= new Date();
-        console.log(currentdate);
+        console.log(new Date(new Date().setMonth(5)));
         var prevmonths ="";
-        prevmonths = new Date(currentdate.setMonth(0));
+        prevmonths = new Date(new Date(new Date().setMonth(2)));
        console.log(prevmonths);
        //console.log( prevmonths.toISOString());
        //console.log(currentdate.toISOString());
@@ -70,13 +70,118 @@ router.get('/:id',(req,res)=>{
             // First Stage
             {
               $match : {
-                "invoicedate": { $gte:new Date(), $lt: new Date(new Date().setMonth(new Date().getMonth()+2))  }
+                "invoicedate": {$gte: new Date(new Date().setMonth(3)),$lte: new Date(new Date().setMonth(5))} 
                }
             },
             // Second Stage
             {
               $group : {
-                _id: {$substr: ['$invoicedate', 5, 2]}, 
+                _id: {$substr: ['$invoicedate', 5, 2]},  
+                totalSaleAmount: { 
+                    "$sum": { "$sum": "$invoiceDetails.totalamount" } 
+                }
+    
+                 
+              }
+            }
+           ])
+          
+        .then(data => res.json(data))
+        .catch(error => res.status(400).json('Error:'+error))
+    }
+    else if(req.params.id=='2')
+    {
+        var currentdate="";
+        currentdate= new Date();
+        console.log(new Date(new Date().setMonth(5)));
+        var prevmonths ="";
+        prevmonths = new Date(new Date(new Date().setMonth(2)));
+       console.log(prevmonths);
+       //console.log( prevmonths.toISOString());
+       //console.log(currentdate.toISOString());
+    //var cur=new Date(currentdate);
+    //var prv=new Date(prevmonths);
+       invoiceTemplateCopy.aggregate([
+            // First Stage
+            {
+              $match : {
+                "invoicedate": {$gte: new Date(new Date().setMonth(6)),$lte: new Date(new Date().setMonth(8))} 
+               }
+            },
+            // Second Stage
+            {
+              $group : {
+                _id: {$substr: ['$invoicedate', 5, 2]},  
+                totalSaleAmount: { 
+                    "$sum": { "$sum": "$invoiceDetails.totalamount" } 
+                }
+    
+                 
+              }
+            }
+           ])
+          
+        .then(data => res.json(data))
+        .catch(error => res.status(400).json('Error:'+error))
+    }
+    else if(req.params.id=='3')
+    {
+        var currentdate="";
+        currentdate= new Date();
+        console.log(new Date(new Date().setMonth(5)));
+        var prevmonths ="";
+        prevmonths = new Date(new Date(new Date().setMonth(2)));
+       console.log(prevmonths);
+       //console.log( prevmonths.toISOString());
+       //console.log(currentdate.toISOString());
+    //var cur=new Date(currentdate);
+    //var prv=new Date(prevmonths);
+       invoiceTemplateCopy.aggregate([
+            // First Stage
+            {
+              $match : {
+                "invoicedate": {$gte: new Date(new Date().setMonth(9)),$lte: new Date(new Date().setMonth(11))} 
+               }
+            },
+            // Second Stage
+            {
+              $group : {
+                _id: {$substr: ['$invoicedate', 5, 2]},  
+                totalSaleAmount: { 
+                    "$sum": { "$sum": "$invoiceDetails.totalamount" } 
+                }
+    
+                 
+              }
+            }
+           ])
+          
+        .then(data => res.json(data))
+        .catch(error => res.status(400).json('Error:'+error))
+    }
+    else if(req.params.id=='4')
+    {
+        var currentdate="";
+        currentdate= new Date();
+        console.log(new Date(new Date().setMonth(5)));
+        var prevmonths ="";
+        prevmonths = new Date(new Date(new Date().setMonth(2)));
+       console.log(prevmonths);
+       //console.log( prevmonths.toISOString());
+       //console.log(currentdate.toISOString());
+    //var cur=new Date(currentdate);
+    //var prv=new Date(prevmonths);
+       invoiceTemplateCopy.aggregate([
+            // First Stage
+            {
+              $match : {
+                "invoicedate": {$gte: new Date(new Date().setMonth(0)),$lte: new Date(new Date().setMonth(2))} 
+               }
+            },
+            // Second Stage
+            {
+              $group : {
+                _id: {$substr: ['$invoicedate', 5, 2]},  
                 totalSaleAmount: { 
                     "$sum": { "$sum": "$invoiceDetails.totalamount" } 
                 }
