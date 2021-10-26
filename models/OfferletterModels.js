@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 
-const invoiceTemplateCopy = new mongoose.Schema({
+const offerTemplateCopy = new mongoose.Schema({
     employeename:{type:String,required:true},
     offerurl:{type:String,required:false},
     salary:{type:Number,required:true},

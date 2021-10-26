@@ -113,8 +113,8 @@ const updatepdf =({params},res) => {
     });
   }
 
-router.post('/generateReportWeb',
-generateReportWeb)
+router.post('/generateofferletterReportWeb',
+generateofferletterReportWeb)
 
 
 module.exports = router
